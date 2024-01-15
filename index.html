@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    function SimuladorEmprestimo() {
+        this.valorEmprestimo = 0;
+        this.taxaJuros = 0;
+        this.numeroParcelas = 0;
+
+        this.calcularParcelas = function () {
+            for (let i = 1; i <= this.numeroParcelas; i++) {
+                let valorParcela = (this.valorEmprestimo * this.taxaJuros / 100) / (1 - Math.pow(1 + this.taxaJuros / 100, -this.numeroParcelas));
+                alert("Parcela " + i + ": R$ " + valorParcela.toFixed(2));
+                this.valorEmprestimo -= valorParcela;
+            }
+        };
+    }
+
+    let simulador = new SimuladorEmprestimo();
+
+    simulador.valorEmprestimo = parseFloat(prompt("Informe o valor do empréstimo:"));
+    simulador.taxaJuros = parseFloat(prompt("Informe a taxa de juros (%):"));
+    simulador.numeroParcelas = parseInt(prompt("Informe o número de parcelas:"));
+
+    simulador.calcularParcelas();
+
+</script>
